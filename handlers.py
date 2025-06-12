@@ -1,5 +1,6 @@
 from telethon import events
 from config import ALLOWED_CHAT_IDS, EXCLUSIVE_CHAT_IDS
+from word_game import process_word_game
 import random
 
 # глобальна змінна — буде зберігати client, яку передаємо з main.py
@@ -21,6 +22,12 @@ def setup_handlers(_client):
 
         text = event.raw_text.lower()
         user_id = event.sender_id
+
+
+            # 🧩 Обробка гри в слова
+        if await process_word_game(event, user_id, text):
+            return  # Якщо це була гра, далі не йдемо
+
 
         if event.chat_id in EXCLUSIVE_CHAT_IDS and text == "секрет":
             await event.reply("🔐 Це ексклюзивне повідомлення лише для цього чату!")
