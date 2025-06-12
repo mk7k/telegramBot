@@ -74,7 +74,7 @@ async def handler(event):
     elif '?' in text:
         await event.reply("Є питання?")
     elif 'бот' in text:
-        await event.reply("да, я тут!")
+        await event.reply("да я тут!")
         
 async def show_chat_id():
     dialogs = await client.get_dialogs()
