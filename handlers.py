@@ -55,7 +55,7 @@ def setup_handlers(_client):
         if text == "гра":
             number = random.randint(1, 10)
             game_states[user_id] = {"in_game": True, "number": number}
-            await event.reply("🎲 Я загадав число від 1 до 10.")
+            await event.reply("🎲 Я загадав число від 1 до 10.Відгадай")
         elif "❤️" in text:
             await event.reply("✅ Сердечко побачив")
         elif "привіт" in text:
