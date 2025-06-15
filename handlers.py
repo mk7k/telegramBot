@@ -29,9 +29,17 @@ def setup_handlers(_client):
             return  # Якщо це була гра, далі не йдемо
 
 
-        if event.chat_id in EXCLUSIVE_CHAT_IDS and text == "секрет":
-            await event.reply("🔐 Це ексклюзивне повідомлення лише для цього чату!")
+        EXCLUSIVE_COMMANDS = {
+            "секрет": "🔐 Це ексклюзивне повідомлення лише для цього чату!",
+            "настінька": "це сонечко",
+            "сонечко": "це Настінька)",
+           # "Настінька": "це сонечко",
+        }
+
+        if event.chat_id in EXCLUSIVE_CHAT_IDS and text in EXCLUSIVE_COMMANDS:
+            await event.reply(EXCLUSIVE_COMMANDS[text])
             return
+
 
         if game_states.get(user_id, {}).get("in_game"):
             if text == "вийти":
@@ -53,11 +61,12 @@ def setup_handlers(_client):
             return
 
         if text == "гра":
-            number = random.randint(1, 10)
+            number = random.randint(1, 1000)
             game_states[user_id] = {"in_game": True, "number": number}
-            await event.reply("🎲 Я загадав число від 1 до 10.Відгадай")
+            await event.reply("🎲 Я загадав число від 1 до 1000.Відгадай")
         elif "❤️" in text:
-            await event.reply("✅ Сердечко побачив")
+           # await event.reply("✅ Сердечко побачив")
+           await event.reply("❤️🧡💛💚🩵💙💜🤎🖤🩶🤍🩷💘💝💖💗💓💞💕💌💟♥️❣️❤️‍🩹💔❤️‍🔥")
         elif "привіт" in text:
             await event.reply("Привіт! Команди: 'гра', 'бот', '❤', '?'")
         elif "?" in text:
